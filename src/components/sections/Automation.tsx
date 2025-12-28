@@ -66,7 +66,7 @@ export function Automation() {
 
 
         {/* Automation Workflows */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {automationWorkflows.map((workflow, index) => (
             <motion.div
               key={workflow.id}
@@ -75,7 +75,7 @@ export function Automation() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="glass-card p-8 rounded-3xl group hover:glow-effect transition-all duration-500"
+              className="glass-card p-6 sm:p-8 rounded-3xl group hover:glow-effect transition-all duration-500"
             >
               {/* Header */}
               <div className="flex items-start justify-between mb-6">

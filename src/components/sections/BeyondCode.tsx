@@ -60,7 +60,7 @@ export function BeyondCode() {
         </motion.div>
 
         {/* Interests Grid */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16">
           {interests.map((interest, index) => (
             <motion.div
               key={index}
@@ -69,7 +69,7 @@ export function BeyondCode() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -5, scale: 1.02 }}
-              className="glass-card p-8 rounded-3xl group hover:glow-effect transition-all duration-500"
+              className="glass-card p-6 sm:p-8 rounded-3xl group hover:glow-effect transition-all duration-500"
             >
               <div className="flex items-start space-x-4 mb-6">
                 <div className="text-primary-400 group-hover:scale-110 transition-transform duration-300">

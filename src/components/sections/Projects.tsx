@@ -65,17 +65,17 @@ export function Projects() {
   const otherProjects = projects.filter(p => !p.featured)
 
   return (
-    <section id="projects" className="py-24 relative">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+    <section id="projects" className="py-16 sm:py-20 lg:py-24 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold gradient-text mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text mb-4 sm:mb-6">
             Featured Projects
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">

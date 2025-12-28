@@ -12,7 +12,7 @@ import { Contact } from '@/components/sections/Contact'
 
 export default function Home() {
   return (
-    <>
+    <div className="overflow-x-hidden">
       <Navigation />
       <ScrollProgress />
       <main className="relative">
@@ -26,6 +26,6 @@ export default function Home() {
         <Experience />
         <Contact />
       </main>
-    </>
+    </div>
   )
 }
