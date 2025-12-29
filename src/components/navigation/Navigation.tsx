@@ -11,6 +11,7 @@ const navItems = [
   { name: 'Projects', href: '#projects' },
   { name: 'LeetCode', href: '#leetcode' },
   { name: 'Automation', href: '#automation' },
+  { name: 'Certificates', href: '#certificates' },
   { name: 'Beyond Code', href: '#beyond-code' },
   { name: 'Experience', href: '#experience' },
   { name: 'Contact', href: '#contact' }
@@ -46,6 +47,25 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Body scroll lock when navigation is open
+  useEffect(() => {
+    if (isOpen) {
+      // Lock body scroll
+      document.body.style.overflow = 'hidden'
+      document.body.style.paddingRight = '0px' // Prevent layout shift
+    } else {
+      // Restore body scroll
+      document.body.style.overflow = 'unset'
+      document.body.style.paddingRight = 'unset'
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset'
+      document.body.style.paddingRight = 'unset'
+    }
+  }, [isOpen])
+
   const scrollToSection = (href: string) => {
     const element = document.getElementById(href.substring(1))
     if (element) {
@@ -60,7 +80,7 @@ export function Navigation() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
         scrolled 
           ? 'py-4 bg-black/20 backdrop-blur-lg border-b border-white/10' 
           : 'py-6 bg-transparent'
@@ -142,57 +162,95 @@ export function Navigation() {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - Proper Stacking */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
+            {/* Backdrop - Isolates page content */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 bg-black/80 lg:hidden"
+              style={{ 
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100vw',
+                height: '100vh',
+                zIndex: 9998
+              }}
               onClick={() => setIsOpen(false)}
             />
             
-            {/* Mobile Menu */}
+            {/* Mobile Menu Panel - True Overlay */}
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="absolute top-full left-6 right-6 mt-4 lg:hidden"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 300, 
+                damping: 30
+              }}
+              className="fixed top-0 right-0 h-screen w-80 max-w-[90vw] bg-black border-l border-white/20 lg:hidden overflow-hidden"
+              style={{ 
+                position: 'fixed',
+                top: 0,
+                right: 0,
+                height: '100vh',
+                zIndex: 9999,
+                isolation: 'isolate'
+              }}
             >
-              <div className="glass-card p-6 rounded-2xl border border-white/10">
-                <div className="space-y-4">
-                  {navItems.map((item, index) => (
-                    <motion.button
-                      key={item.name}
-                      onClick={() => scrollToSection(item.href)}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ 
-                        opacity: 1, 
-                        x: 0,
-                        transition: { delay: index * 0.05 }
-                      }}
-                      whileHover={{ x: 5, scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className={`block w-full text-left px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ${
-                        activeSection === item.href.substring(1)
-                          ? 'text-primary-400 bg-primary-500/10 glow-text'
-                          : 'text-white/80 hover:text-white hover:bg-white/5 hover:glow-text'
-                      }`}
-                    >
-                      <div className="flex items-center space-x-3">
-                        <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              <div className="h-full flex flex-col bg-black">
+                {/* Clean Header */}
+                <div className="flex items-center justify-between p-6 border-b border-white/10 bg-black">
+                  <span className="text-xl font-bold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
+                    Navigation
+                  </span>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
+                  >
+                    <XMarkIcon className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Navigation List - Internal scroll only */}
+                <div className="flex-1 overflow-y-auto bg-black">
+                  <nav className="py-4 px-4 space-y-1">
+                    {navItems.map((item) => (
+                      <button
+                        key={item.name}
+                        onClick={() => scrollToSection(item.href)}
+                        className={`w-full text-left px-4 py-4 rounded-lg transition-all duration-200 ${
                           activeSection === item.href.substring(1)
-                            ? 'bg-primary-400 glow-effect'
-                            : 'bg-white/30'
-                        }`} />
-                        <span>{item.name}</span>
-                      </div>
-                    </motion.button>
-                  ))}
+                            ? 'bg-primary-500/20 text-primary-300 border border-primary-400/30'
+                            : 'text-white/80 hover:text-white hover:bg-white/5'
+                        }`}
+                      >
+                        <div className="flex items-center space-x-3">
+                          <div className={`w-2 h-2 rounded-full ${
+                            activeSection === item.href.substring(1)
+                              ? 'bg-primary-400'
+                              : 'bg-white/40'
+                          }`} />
+                          <span className="font-medium">{item.name}</span>
+                        </div>
+                      </button>
+                    ))}
+                  </nav>
+                </div>
+
+                {/* Footer */}
+                <div className="p-6 border-t border-white/10 bg-black">
+                  <button
+                    onClick={() => scrollToSection('#contact')}
+                    className="w-full px-4 py-3 bg-primary-500/20 hover:bg-primary-500/30 text-primary-300 rounded-lg font-medium transition-colors"
+                  >
+                    Get In Touch
+                  </button>
                 </div>
               </div>
             </motion.div>
