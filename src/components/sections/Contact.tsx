@@ -1,12 +1,14 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { 
   EnvelopeIcon, 
   PhoneIcon, 
   MapPinIcon,
-  PaperAirplaneIcon
+  PaperAirplaneIcon,
+  CheckCircleIcon,
+  ExclamationCircleIcon
 } from '@heroicons/react/24/outline'
 
 const socialLinks = [
@@ -36,6 +38,9 @@ export function Contact() {
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [statusMessage, setStatusMessage] = useState('')
+  const formRef = useRef<HTMLFormElement>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
@@ -47,8 +52,77 @@ export function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    // Handle form submission here
-    setTimeout(() => setIsSubmitting(false), 2000)
+    setSubmitStatus('idle')
+    
+    // Form validation
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setSubmitStatus('error')
+      setStatusMessage('Please fill in all required fields.')
+      setIsSubmitting(false)
+      setTimeout(() => {
+        setSubmitStatus('idle')
+        setStatusMessage('')
+      }, 5000)
+      return
+    }
+    
+    try {
+      // Send email using Web3Forms API
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          subject: `Portfolio Contact: ${formData.subject}`,
+          message: `From: ${formData.name} (${formData.email})\n\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`,
+          from_name: formData.name,
+          replyto: formData.email
+        })
+      })
+      
+      const result = await response.json()
+      
+      if (response.ok && result.success) {
+        setSubmitStatus('success')
+        setStatusMessage('Message sent successfully! I\'ll get back to you soon.')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        throw new Error(result.message || 'Failed to send message')
+      }
+      
+    } catch (error) {
+      console.error('Email sending error:', error)
+      
+      // Fallback to mailto if Web3Forms fails
+      const subject = encodeURIComponent(`Portfolio Contact: ${formData.subject}`)
+      const body = encodeURIComponent(
+        `Hi Akshat,\n\n` +
+        `I'm reaching out to you through your portfolio contact form.\n\n` +
+        `My Details:\n` +
+        `Name: ${formData.name}\n` +
+        `Email: ${formData.email}\n` +
+        `Subject: ${formData.subject}\n\n` +
+        `Message:\n${formData.message}\n\n` +
+        `Best regards,\n${formData.name}`
+      )
+      
+      const mailtoLink = `mailto:chauhanakshat50@gmail.com?subject=${subject}&body=${body}`
+      window.open(mailtoLink, '_self')
+      
+      setSubmitStatus('error')
+      setStatusMessage('Email service temporarily unavailable. Your email client should open as fallback.')
+    }
+    
+    setIsSubmitting(false)
+    setTimeout(() => {
+      setSubmitStatus('idle')
+      setStatusMessage('')
+    }, 8000)
   }
 
   return (
@@ -166,7 +240,7 @@ export function Contact() {
                 Send a Message
               </h3>
               
-              <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 lg:space-y-6">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 lg:space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
                   <div>
                     <label htmlFor="name" className="block text-white/80 text-xs sm:text-sm font-medium mb-1 sm:mb-2">
@@ -232,14 +306,34 @@ export function Contact() {
                   />
                 </div>
 
+                {/* Status Message */}
+                {statusMessage && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`p-3 sm:p-4 rounded-lg sm:rounded-xl border flex items-center space-x-2 sm:space-x-3 ${
+                      submitStatus === 'success'
+                        ? 'bg-green-500/10 border-green-500/30 text-green-400'
+                        : 'bg-red-500/10 border-red-500/30 text-red-400'
+                    }`}
+                  >
+                    {submitStatus === 'success' ? (
+                      <CheckCircleIcon className="w-5 h-5 flex-shrink-0" />
+                    ) : (
+                      <ExclamationCircleIcon className="w-5 h-5 flex-shrink-0" />
+                    )}
+                    <p className="text-xs sm:text-sm">{statusMessage}</p>
+                  </motion.div>
+                )}
+
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full group relative px-4 py-3 sm:px-6 sm:py-4 lg:px-8 bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg sm:rounded-xl text-white font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 hover:shadow-2xl hover:shadow-primary-500/50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full relative px-4 py-3 sm:px-6 sm:py-4 lg:px-8 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-400 hover:to-primary-500 rounded-lg sm:rounded-xl text-white font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 hover:shadow-2xl hover:shadow-primary-500/50 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden group"
                 >
-                  <span className="flex items-center justify-center space-x-2">
+                  <span className="relative z-10 flex items-center justify-center space-x-2">
                     {isSubmitting ? (
                       <>
                         <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -252,7 +346,6 @@ export function Contact() {
                       </>
                     )}
                   </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-500 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </motion.button>
               </form>
             </div>
