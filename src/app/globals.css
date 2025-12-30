@@ -22,24 +22,71 @@
 @layer components {
   .glass-card {
     @apply bg-glass-white backdrop-blur-xl border border-white/20 shadow-xl;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
   }
   
   .glass-button {
     @apply bg-glass-medium backdrop-blur-xl border border-white/30 hover:bg-glass-white transition-all duration-300;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
   }
   
   .gradient-text {
     @apply bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 bg-clip-text text-transparent;
+    animation: gradient-shift 3s ease-in-out infinite;
   }
   
   .glow-effect {
     @apply shadow-2xl shadow-primary-500/25;
+    box-shadow: 
+      0 0 20px rgba(139, 92, 246, 0.15),
+      0 0 40px rgba(139, 92, 246, 0.1),
+      0 0 80px rgba(139, 92, 246, 0.05);
   }
   
   .glow-text {
-    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+    text-shadow: 
+      0 0 10px rgba(139, 92, 246, 0.5),
+      0 0 20px rgba(139, 92, 246, 0.3),
+      0 0 40px rgba(139, 92, 246, 0.1);
   }
   
+  /* Enhanced floating animation */
+  .floating {
+    animation: floating 6s ease-in-out infinite;
+  }
+  
+  .floating-delayed {
+    animation: floating 6s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+  
+  /* Magnetic hover effect */
+  .magnetic-hover {
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .magnetic-hover:hover {
+    transform: scale(1.05) translateY(-5px);
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #8b5cf6, #a78bfa);
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #7c3aed, #8b5cf6);
+  }
+
   /* Section spacing */
   section {
     scroll-margin-top: 100px;
@@ -51,5 +98,32 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.25);
   }
 }
