@@ -3,14 +3,18 @@
 import { motion } from 'framer-motion'
 import { ArrowDownIcon, EnvelopeIcon, DocumentIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
+import { TypeWriter } from '../ui/TypeWriter'
+import { AnimatedCounter } from '../ui/AnimatedCounter'
+import { MagneticButton } from '../ui/MagneticButton'
 
 export function Hero() {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background decoration */}
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden noise-overlay">
+      {/* Animated blob backgrounds */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="blob w-[500px] h-[500px] bg-primary-500/20 top-1/4 left-1/4" style={{ animationDelay: '0s' }} />
+        <div className="blob w-[400px] h-[400px] bg-secondary-400/20 bottom-1/4 right-1/4" style={{ animationDelay: '-2s' }} />
+        <div className="blob w-[300px] h-[300px] bg-primary-600/15 top-1/2 right-1/3" style={{ animationDelay: '-4s' }} />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
@@ -43,7 +47,10 @@ export function Hero() {
               className="space-y-4"
             >
               <h2 className="text-xl sm:text-2xl lg:text-3xl text-white/90 font-light">
-                Student & <span className="gradient-text font-semibold">Builder</span>
+                <TypeWriter 
+                  words={['Student & Builder', 'Problem Solver', 'Web Developer', 'Tech Enthusiast']} 
+                  className="font-semibold"
+                />
               </h2>
               <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-xl">
                 Passionate about crafting efficient solutions and automating the world, one line of code at a time.
@@ -57,26 +64,21 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4"
             >
-              <motion.a
+              <MagneticButton
                 href="#contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-2xl font-semibold hover:shadow-2xl hover:shadow-primary-500/25 transition-all duration-300"
+                className="flex items-center justify-center space-x-2 px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-2xl font-semibold hover:shadow-2xl hover:shadow-primary-500/25 transition-all duration-300 shimmer"
               >
                 <EnvelopeIcon className="w-5 h-5" />
                 <span>Get In Touch</span>
-              </motion.a>
+              </MagneticButton>
               
-              <motion.a
+              <MagneticButton
                 href="/resume.pdf"
-                target="_blank"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center space-x-2 px-8 py-4 glass-card border border-white/20 text-white rounded-2xl font-semibold hover:glow-effect transition-all duration-300"
+                className="flex items-center justify-center space-x-2 px-8 py-4 glass-card-glow border border-white/20 text-white rounded-2xl font-semibold hover:glow-effect transition-all duration-300"
               >
                 <DocumentIcon className="w-5 h-5" />
                 <span>View Resume</span>
-              </motion.a>
+              </MagneticButton>
             </motion.div>
 
             {/* Stats */}
@@ -87,13 +89,15 @@ export function Hero() {
               className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pt-6 sm:pt-8 border-t border-white/10"
             >
               {[
-                { number: '6+', label: 'Projects Built' },
-                { number: '2+', label: 'Years Learning' },
-                { number: '177', label: 'LeetCode Solved' }
+                { number: 6, suffix: '+', label: 'Projects Built' },
+                { number: 2, suffix: '+', label: 'Years Learning' },
+                { number: 177, suffix: '', label: 'LeetCode Solved' }
               ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-lg sm:text-xl lg:text-2xl font-bold gradient-text">{stat.number}</div>
-                  <div className="text-white/60 text-xs sm:text-sm">{stat.label}</div>
+                <div key={index} className="text-center group">
+                  <div className="text-lg sm:text-xl lg:text-2xl font-bold gradient-text">
+                    <AnimatedCounter end={stat.number} suffix={stat.suffix} duration={2} />
+                  </div>
+                  <div className="text-white/60 text-xs sm:text-sm group-hover:text-primary-300 transition-colors">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
@@ -106,27 +110,37 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="flex justify-center lg:justify-end order-1 lg:order-2"
           >
-            <div className="relative">
-              {/* Decorative background */}
+            <div className="relative group">
+              {/* Rotating gradient ring */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -inset-4 rounded-full bg-gradient-to-r from-primary-400 via-secondary-400 to-primary-600 opacity-20 blur-sm"
+                className="absolute -inset-3 rounded-full bg-gradient-to-r from-primary-400 via-secondary-400 to-primary-600 opacity-30 blur-sm"
+              />
+              
+              {/* Pulsing glow effect */}
+              <motion.div
+                animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.5, 0.3] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -inset-6 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 blur-2xl"
               />
               
               {/* Photo container */}
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden glass-card border-4 border-white/20 hover:border-primary-400/50 transition-all duration-500"
+                whileHover={{ scale: 1.05, rotate: 2 }}
+                transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden glass-card border-4 border-white/20 group-hover:border-primary-400/60 transition-all duration-500"
               >
                 {/* Your photo */}
                 <Image
                   src="/images/me.jpeg"
                   alt="Akshat Chauhan"
                   fill
-                  className="object-cover object-[50%_25%]" 
+                  className="object-cover object-[50%_25%] group-hover:scale-110 transition-transform duration-700" 
                   priority
                 />
+                {/* Overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </motion.div>
             </div>
           </motion.div>
