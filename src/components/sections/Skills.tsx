@@ -5,32 +5,32 @@ import { motion } from 'framer-motion'
 const skillCategories = [
   {
     title: 'Programming Languages',
-    icon: '💻',
+    icon: '',
     skills: ['Python', 'JavaScript', 'TypeScript', 'Java', 'C++']
   },
   {
     title: 'Frontend Development',
-    icon: '🎨',
+    icon: '',
     skills: ['React', 'Next.js', 'CustomTkinter', 'JavaFX']
   },
   {
     title: 'Backend & APIs',
-    icon: '⚙️',
+    icon: '',
     skills: ['Node.js', 'Express', 'FastAPI', 'API Development']
   },
   {
     title: 'Databases',
-    icon: '🗄️',
+    icon: '',
     skills: ['MySQL', 'MongoDB']
   },
   {
     title: 'AI/ML Libraries',
-    icon: '🤖',
+    icon: '',
     skills: ['Pandas', 'NumPy', 'Scikit-learn', 'Matplotlib', 'XGBoost', 'Random Forest']
   },
   {
     title: 'Tools & Automation',
-    icon: '🔧',
+    icon: '',
     skills: ['Git', 'n8n Automation']
   }
 ]

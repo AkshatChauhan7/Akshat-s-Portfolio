@@ -28,20 +28,20 @@ const skillCategories = [
     title: 'AI/ML',
     color: 'from-purple-400 to-purple-600',
     skills: [
-      { name: 'Machine Learning', level: 78, icon: '🤖' },
-      { name: 'Deep Learning', level: 70, icon: '🧠' },
-      { name: 'Data Analysis', level: 82, icon: '📊' },
-      { name: 'Computer Vision', level: 65, icon: '👁️' }
+      { name: 'Machine Learning', level: 78, icon: '' },
+      { name: 'Deep Learning', level: 70, icon: '' },
+      { name: 'Data Analysis', level: 82, icon: '' },
+      { name: 'Computer Vision', level: 65, icon: '' }
     ]
   },
   {
     title: 'Tools & Others',
     color: 'from-orange-400 to-orange-600',
     skills: [
-      { name: 'Git/GitHub', level: 85, icon: '🔧' },
-      { name: 'Docker', level: 70, icon: '🐳' },
-      { name: 'AWS/Cloud', level: 60, icon: '☁️' },
-      { name: 'Database Design', level: 75, icon: '🗄️' }
+      { name: 'Git/GitHub', level: 85, icon: '' },
+      { name: 'Docker', level: 70, icon: '' },
+      { name: 'AWS/Cloud', level: 60, icon: '' },
+      { name: 'Database Design', level: 75, icon: '' }
     ]
   }
 ]
