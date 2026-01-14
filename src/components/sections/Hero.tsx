@@ -48,7 +48,7 @@ export function Hero() {
             >
               <h2 className="text-xl sm:text-2xl lg:text-3xl text-white/90 font-light">
                 <TypeWriter 
-                  words={['Student & Builder', 'Problem Solver', 'Web Developer', 'Tech Enthusiast']} 
+                  words={['Student', 'Problem Solver', 'Web Developer', 'Tech Enthusiast']} 
                   className="font-semibold"
                 />
               </h2>
