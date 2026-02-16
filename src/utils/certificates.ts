@@ -41,6 +41,16 @@ export const certificates: Certificate[] = [
     description: 'Certification in JavaScript programming, covering fundamentals to advanced concepts'
   },
   {
+    id: 'jpmorgan-quant',
+    title: 'Quantitative Research',
+    issuer: 'JP Morgan',
+    date: '2025',
+    thumbnailUrl: '/Certificates/JP Morgan Quantitative Research.pdf',
+    fullImageUrl: '/Certificates/JP Morgan Quantitative Research.pdf',
+    category: 'Programming',
+    description: 'Certification in quantitative research, financial modeling, and algorithmic trading.'
+  },
+  {
     id: 'nvidia-fundamentals',
     title: 'Deep Learning Fundamentals',
     issuer: 'NVIDIA Deep Learning Institute',
