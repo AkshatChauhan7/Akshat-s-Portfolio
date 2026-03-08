@@ -1,13 +1,26 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { ArrowDownIcon, EnvelopeIcon, DocumentIcon } from '@heroicons/react/24/outline'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowDownIcon, EnvelopeIcon, DocumentIcon, ClipboardDocumentIcon, CheckIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import { TypeWriter } from '../ui/TypeWriter'
 import { AnimatedCounter } from '../ui/AnimatedCounter'
 import { MagneticButton } from '../ui/MagneticButton'
 
 export function Hero() {
+  const [copied, setCopied] = useState(false)
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText('chauhanakshat50@gmail.com')
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy email:', err)
+    }
+  }
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden noise-overlay">
       {/* Animated blob backgrounds */}
@@ -71,9 +84,39 @@ export function Hero() {
                 <EnvelopeIcon className="w-5 h-5" />
                 <span>Get In Touch</span>
               </MagneticButton>
+
+              <div className="relative">
+                <motion.button
+                  onClick={copyEmail}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex items-center justify-center space-x-2 px-8 py-4 glass-card border border-white/20 text-white rounded-2xl font-semibold hover:border-primary-400/40 transition-all duration-300"
+                >
+                  {copied ? (
+                    <CheckIcon className="w-5 h-5 text-green-400" />
+                  ) : (
+                    <ClipboardDocumentIcon className="w-5 h-5" />
+                  )}
+                  <span>{copied ? 'Copied!' : 'Copy Email'}</span>
+                </motion.button>
+                <AnimatePresence>
+                  {copied && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-3 py-1 bg-green-500/90 text-white text-sm rounded-lg whitespace-nowrap"
+                    >
+                      Email copied!
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
               
               <MagneticButton
                 href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center justify-center space-x-2 px-8 py-4 glass-card-glow border border-white/20 text-white rounded-2xl font-semibold hover:glow-effect transition-all duration-300"
               >
                 <DocumentIcon className="w-5 h-5" />
@@ -89,13 +132,13 @@ export function Hero() {
               className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pt-6 sm:pt-8 border-t border-white/10"
             >
               {[
-                { number: 6, suffix: '+', label: 'Projects Built' },
-                { number: 2, suffix: '+', label: 'Years Learning' },
-                { number: 177, suffix: '', label: 'LeetCode Solved' }
+                { number: 6, suffix: '+', label: 'Projects Built', startFrom: 6 },
+                { number: 2, suffix: '+', label: 'Years Learning', startFrom: 2 },
+                { number: 191, suffix: '+', label: 'LeetCode Solved', startFrom: 191 }
               ].map((stat, index) => (
                 <div key={index} className="text-center group">
                   <div className="text-lg sm:text-xl lg:text-2xl font-bold gradient-text">
-                    <AnimatedCounter end={stat.number} suffix={stat.suffix} duration={2} />
+                    <AnimatedCounter end={stat.number} suffix={stat.suffix} duration={2} startFrom={stat.startFrom} />
                   </div>
                   <div className="text-white/60 text-xs sm:text-sm group-hover:text-primary-300 transition-colors">{stat.label}</div>
                 </div>

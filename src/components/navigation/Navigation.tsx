@@ -80,6 +80,8 @@ export function Navigation() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
+      role="navigation"
+      aria-label="Main navigation"
       className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
         scrolled 
           ? 'py-4 bg-black/20 backdrop-blur-lg border-b border-white/10' 
@@ -97,6 +99,7 @@ export function Navigation() {
             <button
               onClick={() => scrollToSection('#hero')}
               className="text-2xl font-bold gradient-text hover:glow-text transition-all duration-300"
+              aria-label="Go to homepage"
             >
               AC
             </button>
@@ -134,6 +137,9 @@ export function Navigation() {
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden p-2 rounded-xl glass-button text-white"
+            aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             <AnimatePresence mode="wait">
               {isOpen ? (
@@ -185,6 +191,7 @@ export function Navigation() {
             
             {/* Mobile Menu Panel - True Overlay */}
             <motion.div
+              id="mobile-menu"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -202,6 +209,9 @@ export function Navigation() {
                 zIndex: 9999,
                 isolation: 'isolate'
               }}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation menu"
             >
               <div className="h-full flex flex-col bg-black">
                 {/* Clean Header */}
@@ -212,6 +222,7 @@ export function Navigation() {
                   <button
                     onClick={() => setIsOpen(false)}
                     className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
+                    aria-label="Close navigation menu"
                   >
                     <XMarkIcon className="w-5 h-5" />
                   </button>

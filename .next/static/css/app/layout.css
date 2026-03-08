@@ -731,6 +731,17 @@ section {
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
 .pointer-events-none {
   pointer-events: none;
 }
@@ -764,6 +775,9 @@ section {
 .-bottom-4 {
   bottom: -1rem;
 }
+.-bottom-8 {
+  bottom: -2rem;
+}
 .-left-4 {
   left: -1rem;
 }
@@ -781,6 +795,9 @@ section {
 }
 .bottom-1\/4 {
   bottom: 25%;
+}
+.bottom-6 {
+  bottom: 1.5rem;
 }
 .bottom-8 {
   bottom: 2rem;
@@ -812,6 +829,9 @@ section {
 .right-2 {
   right: 0.5rem;
 }
+.right-6 {
+  right: 1.5rem;
+}
 .top-0 {
   top: 0px;
 }
@@ -842,6 +862,9 @@ section {
 .z-50 {
   z-index: 50;
 }
+.z-\[100\] {
+  z-index: 100;
+}
 .z-\[60\] {
   z-index: 60;
 }
@@ -857,6 +880,10 @@ section {
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .mx-auto {
   margin-left: auto;
@@ -915,6 +942,9 @@ section {
 }
 .mt-3 {
   margin-top: 0.75rem;
+}
+.mt-4 {
+  margin-top: 1rem;
 }
 .mt-6 {
   margin-top: 1.5rem;
@@ -1047,6 +1077,9 @@ section {
 }
 .w-2\.5 {
   width: 0.625rem;
+}
+.w-20 {
+  width: 5rem;
 }
 .w-3 {
   width: 0.75rem;
@@ -1353,6 +1386,9 @@ section {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.whitespace-nowrap {
+  white-space: nowrap;
+}
 .rounded {
   border-radius: 0.25rem;
 }
@@ -1445,6 +1481,9 @@ section {
 .bg-black\/50 {
   background-color: rgb(0 0 0 / 0.5);
 }
+.bg-black\/60 {
+  background-color: rgb(0 0 0 / 0.6);
+}
 .bg-black\/80 {
   background-color: rgb(0 0 0 / 0.8);
 }
@@ -1466,6 +1505,9 @@ section {
 }
 .bg-green-500\/20 {
   background-color: rgb(34 197 94 / 0.2);
+}
+.bg-green-500\/90 {
+  background-color: rgb(34 197 94 / 0.9);
 }
 .bg-indigo-400\/15 {
   background-color: rgb(129 140 248 / 0.15);
@@ -1669,6 +1711,9 @@ section {
 .to-pink-600 {
   --tw-gradient-to: #db2777 var(--tw-gradient-to-position);
 }
+.to-primary-400 {
+  --tw-gradient-to: #a78bfa var(--tw-gradient-to-position);
+}
 .to-primary-500 {
   --tw-gradient-to: #8b5cf6 var(--tw-gradient-to-position);
 }
@@ -1742,6 +1787,9 @@ section {
 .p-4 {
   padding: 1rem;
 }
+.p-5 {
+  padding: 1.25rem;
+}
 .p-6 {
   padding: 1.5rem;
 }
@@ -1767,6 +1815,10 @@ section {
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
+}
+.py-0\.5 {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
 }
 .py-1 {
   padding-top: 0.25rem;
@@ -1838,6 +1890,9 @@ section {
 .align-middle {
   vertical-align: middle;
 }
+.font-mono {
+  font-family: Fira Code, monospace;
+}
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -1890,6 +1945,9 @@ section {
 .font-semibold {
   font-weight: 600;
 }
+.uppercase {
+  text-transform: uppercase;
+}
 .capitalize {
   text-transform: capitalize;
 }
@@ -1898,6 +1956,9 @@ section {
 }
 .leading-tight {
   line-height: 1.25;
+}
+.tracking-wider {
+  letter-spacing: 0.05em;
 }
 .text-blue-400 {
   --tw-text-opacity: 1;
@@ -2278,6 +2339,167 @@ section {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
 }
+
+/* ========================================
+   ACCESSIBILITY IMPROVEMENTS
+   ======================================== */
+
+/* Focus visible styles for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.8);
+  outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse users */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link styles */
+.sr-only:focus {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .blob,
+  .shimmer::after,
+  .floating {
+    animation: none !important;
+  }
+}
+
+/* ========================================
+   MOBILE OPTIMIZATIONS
+   ======================================== */
+
+/* Improve touch targets on mobile */
+@media (max-width: 640px) {
+  button,
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Reduce blob sizes on mobile for performance */
+  .blob {
+    filter: blur(40px);
+    opacity: 0.5;
+  }
+  
+  /* Adjust glass card padding on mobile */
+  .glass-card {
+    padding: 1rem;
+  }
+  
+  /* Smaller section spacing on mobile */
+  section {
+    scroll-margin-top: 70px;
+  }
+  
+  /* Better tap feedback */
+  button:active,
+  a:active,
+  [role="button"]:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+  
+  /* Prevent text selection on interactive elements */
+  button,
+  [role="button"] {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+         user-select: none;
+  }
+  
+  /* Fix horizontal overflow */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Improve readability on small screens */
+  p, li {
+    line-height: 1.7;
+  }
+}
+
+/* Medium screens */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .blob {
+    filter: blur(60px);
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+  .nav-container {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+  
+  section {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Improved touch scrolling */
+.overflow-y-auto,
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Better mobile input styling */
+@media (max-width: 640px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass-card {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+  }
+  
+  .gradient-text {
+    -webkit-text-fill-color: white;
+    color: white;
+  }
+}
 .hover\:glow-effect:hover {
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
@@ -2376,6 +2598,9 @@ section {
 .hover\:text-white\/60:hover {
   color: rgb(255 255 255 / 0.6);
 }
+.hover\:text-white\/90:hover {
+  color: rgb(255 255 255 / 0.9);
+}
 .hover\:shadow-2xl:hover {
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
@@ -2403,9 +2628,50 @@ section {
   --tw-shadow-color: rgb(139 92 246 / 0.5);
   --tw-shadow: var(--tw-shadow-colored);
 }
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+.focus\:absolute:focus {
+  position: absolute;
+}
+.focus\:left-4:focus {
+  left: 1rem;
+}
+.focus\:top-4:focus {
+  top: 1rem;
+}
+.focus\:z-\[200\]:focus {
+  z-index: 200;
+}
+.focus\:rounded-lg:focus {
+  border-radius: 0.5rem;
+}
 .focus\:border-primary-400:focus {
   --tw-border-opacity: 1;
   border-color: rgb(167 139 250 / var(--tw-border-opacity, 1));
+}
+.focus\:bg-primary-500:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(139 92 246 / var(--tw-bg-opacity, 1));
+}
+.focus\:px-4:focus {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.focus\:py-2:focus {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.focus\:text-white:focus {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
@@ -2466,6 +2732,9 @@ section {
 .group:hover .group-hover\:animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+.group:hover .group-hover\:border-primary-400\/40 {
+  border-color: rgb(167 139 250 / 0.4);
+}
 .group:hover .group-hover\:border-primary-400\/60 {
   border-color: rgb(167 139 250 / 0.6);
 }
@@ -2480,6 +2749,10 @@ section {
 .group:hover .group-hover\:text-primary-400 {
   --tw-text-opacity: 1;
   color: rgb(167 139 250 / var(--tw-text-opacity, 1));
+}
+.group:hover .group-hover\:text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 .group:hover .group-hover\:text-white\/60 {
   color: rgb(255 255 255 / 0.6);

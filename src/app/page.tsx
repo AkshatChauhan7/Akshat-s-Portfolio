@@ -1,6 +1,7 @@
 import { Navigation } from '@/components/navigation/Navigation'
 import { ScrollProgress } from '@/components/ui/ScrollProgress'
 import { ParticleBackground } from '@/components/ui/ParticleBackground'
+import { KeyboardNav } from '@/components/ui/KeyboardNav'
 import { Hero } from '@/components/sections/Hero'
 import { About } from '@/components/sections/About'
 import { Skills } from '@/components/sections/Skills'
@@ -18,7 +19,8 @@ export default function Home() {
       <ParticleBackground />
       <Navigation />
       <ScrollProgress />
-      <main className="relative">
+      <KeyboardNav />
+      <main className="relative" role="main">
         <Hero />
         <div className="section-divider max-w-4xl mx-auto" />
         <About />

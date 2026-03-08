@@ -13,9 +13,9 @@ import {
 const interests = [
   {
     icon: <TrophyIcon className="w-8 h-8" />,
-    title: 'Fitness & Gym',
-    description: 'Regular gym-goer who believes in balancing physical and mental health through consistent training.',
-    details: ['Strength Training', 'Cardio', 'Wellness', 'Consistency']
+    title: 'Discipline & Resilience',
+    description: 'Dedicated to fitness training as a practice in discipline, goal-setting, and pushing through challenges—skills that directly translate to tackling complex engineering problems.',
+    details: ['Discipline', 'Goal Setting', 'Mental Fortitude', 'Consistency']
   },
   {
     icon: <PuzzlePieceIcon className="w-8 h-8" />,
@@ -31,9 +31,9 @@ const interests = [
   },
   {
     icon: <FilmIcon className="w-8 h-8" />,
-    title: 'Anime Enthusiast',
-    description: 'Passionate about anime art and storytelling. Currently watching seasonal anime and exploring classic series.',
-    details: ['Vinland Saga', 'One Piece', 'Code Geass', 'Kaguya Sama']
+    title: 'Visual Storytelling',
+    description: 'Drawn to anime for its masterful narrative structure and visual design—inspiring my approach to crafting intuitive user experiences and compelling product narratives.',
+    details: ['Narrative Design', 'Visual Aesthetics', 'Character Development', 'World Building']
   }
 ]
 

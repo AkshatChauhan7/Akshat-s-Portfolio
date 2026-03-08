@@ -10,6 +10,7 @@ import {
   CheckCircleIcon,
   ExclamationCircleIcon
 } from '@heroicons/react/24/outline'
+import { LookingFor } from './LookingFor'
 
 const socialLinks = [
   {
@@ -126,7 +127,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-16 sm:py-24 relative min-h-screen flex flex-col justify-center">
+    <section id="contact" className="py-16 sm:py-24 relative min-h-screen flex flex-col justify-center" aria-labelledby="contact-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Section Header */}
         <motion.div
@@ -136,13 +137,18 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-8 sm:mb-12 lg:mb-16"
         >
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold gradient-text mb-3 sm:mb-4 lg:mb-6">
+          <h2 id="contact-heading" className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold gradient-text mb-3 sm:mb-4 lg:mb-6">
             Let's Work Together
           </h2>
           <p className="text-white/70 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-2 sm:px-4">
             Ready to bring your ideas to life? Let's discuss how we can create something amazing together.
           </p>
         </motion.div>
+
+        {/* Looking For Section */}
+        <div className="max-w-3xl mx-auto mb-8 sm:mb-12">
+          <LookingFor />
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16">
           {/* Contact Info */}

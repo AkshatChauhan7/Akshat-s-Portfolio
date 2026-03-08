@@ -87,28 +87,28 @@ export function LeetCode() {
             {
               icon: <TrophyIcon className="w-8 h-8" />,
               title: 'Problems Solved',
-              value: loading ? '...' : (stats?.totalSolved?.toString() || '177'),
+              value: stats?.totalSolved?.toString() || '177',
               subtitle: 'Out of 3,791 total',
               color: 'from-yellow-400 to-orange-500'
             },
             {
               icon: <FireIcon className="w-8 h-8" />,
               title: 'Max Streak',
-              value: loading ? '...' : (stats?.streak?.toString() || '127'),
+              value: stats?.streak?.toString() || '127',
               subtitle: 'Days consecutive',
               color: 'from-red-400 to-pink-500'
             },
             {
               icon: <ChartBarIcon className="w-8 h-8" />,
               title: 'Global Rank',
-              value: loading ? '...' : (stats?.ranking?.toLocaleString() || '811,755'),
+              value: stats?.ranking?.toLocaleString() || '811,755',
               subtitle: 'Worldwide ranking',
               color: 'from-blue-400 to-purple-500'
             },
             {
               icon: <CodeBracketIcon className="w-8 h-8" />,
               title: 'Acceptance Rate',
-              value: loading ? '...' : `${stats?.acceptanceRate?.toFixed(1) || '77.1'}%`,
+              value: `${stats?.acceptanceRate?.toFixed(1) || '77.1'}%`,
               subtitle: 'Solution accuracy',
               color: 'from-green-400 to-teal-500'
             }
@@ -125,7 +125,11 @@ export function LeetCode() {
               <div className={`text-transparent bg-gradient-to-r ${stat.color} bg-clip-text mb-4 group-hover:scale-110 transition-transform duration-300`}>
                 {stat.icon}
               </div>
-              <h3 className="text-2xl font-bold text-white mb-2">{stat.value}</h3>
+              {loading ? (
+                <div className="h-8 w-20 bg-white/10 animate-pulse rounded-lg mb-2" />
+              ) : (
+                <h3 className="text-2xl font-bold text-white mb-2">{stat.value}</h3>
+              )}
               <p className="text-white/80 font-medium mb-1">{stat.title}</p>
               <p className="text-white/60 text-sm">{stat.subtitle}</p>
             </motion.div>

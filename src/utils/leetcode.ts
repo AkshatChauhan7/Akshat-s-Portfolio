@@ -181,44 +181,77 @@ function getFallbackSubmissions(): RecentSubmission[] {
 // Using LeetCode API (third-party services)
 export async function fetchLeetCodeStats(username: string): Promise<LeetCodeStats | null> {
   try {
-    // Option 1: LeetCode Stats API (https://leetcode-stats-api.herokuapp.com/)
+    // Try alfa-leetcode-api (actively maintained)
+    const [profileRes, solvedRes] = await Promise.all([
+      fetch(`https://alfa-leetcode-api.onrender.com/${username}`),
+      fetch(`https://alfa-leetcode-api.onrender.com/${username}/solved`)
+    ])
+    
+    if (!profileRes.ok || !solvedRes.ok) {
+      console.warn('Alfa LeetCode API failed, trying backup...')
+      return await fetchFromBackupAPI(username)
+    }
+    
+    const profileData = await profileRes.json()
+    const solvedData = await solvedRes.json()
+    
+    return {
+      totalSolved: solvedData.solvedProblem || profileData.totalSolved || 191,
+      ranking: profileData.ranking || 784764,
+      acceptanceRate: parseFloat(profileData.acceptanceRate) || 76.3,
+      submissions: profileData.totalSubmissions?.[0]?.submissions || 385,
+      easySolved: solvedData.easySolved || profileData.easySolved || 102,
+      mediumSolved: solvedData.mediumSolved || profileData.mediumSolved || 81,
+      hardSolved: solvedData.hardSolved || profileData.hardSolved || 8,
+      streak: profileData.streak || 127,
+      activeDays: profileData.activeDays || 172
+    }
+  } catch (error) {
+    console.error('Error fetching LeetCode stats:', error)
+    return await fetchFromBackupAPI(username)
+  }
+}
+
+// Backup API in case primary fails
+async function fetchFromBackupAPI(username: string): Promise<LeetCodeStats | null> {
+  try {
+    // Try leetcode-stats-api as backup
     const response = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`)
     
     if (!response.ok) {
-      console.warn('LeetCode Stats API failed, using fallback data')
       return getFallbackStats()
     }
     
     const data = await response.json()
     
     return {
-      totalSolved: data.totalSolved || 177,
-      ranking: data.ranking || 811755,
-      acceptanceRate: parseFloat(data.acceptanceRate) || 77.14,
-      submissions: data.totalSubmissions?.[0]?.submissions || 350,
-      easySolved: data.easySolved || 96,
-      mediumSolved: data.mediumSolved || 73,
+      totalSolved: data.totalSolved || 191,
+      ranking: data.ranking || 784764,
+      acceptanceRate: parseFloat(data.acceptanceRate) || 76.3,
+      submissions: data.totalSubmissions?.[0]?.submissions || 385,
+      easySolved: data.easySolved || 102,
+      mediumSolved: data.mediumSolved || 81,
       hardSolved: data.hardSolved || 8,
-      streak: 127, // This might not be available from API
-      activeDays: 172 // This might not be available from API
+      streak: 127,
+      activeDays: 172
     }
   } catch (error) {
-    console.error('Error fetching LeetCode stats:', error)
+    console.error('Backup API also failed:', error)
     return getFallbackStats()
   }
 }
 
-// Fallback to your current stats if API fails
+// Fallback to your current stats if API fails - Updated March 2026
 function getFallbackStats(): LeetCodeStats {
   return {
-    totalSolved: 177,
-    ranking: 811755,
-    acceptanceRate: 77.14,
-    submissions: 350,
-    easySolved: 96,
-    mediumSolved: 73,
+    totalSolved: 191,
+    ranking: 784764,
+    acceptanceRate: 76.3,
+    submissions: 385,
+    easySolved: 102,
+    mediumSolved: 81,
     hardSolved: 8,
-    streak: 127,
+    streak: 127, // 127-day streak milestone
     activeDays: 172
   }
 }

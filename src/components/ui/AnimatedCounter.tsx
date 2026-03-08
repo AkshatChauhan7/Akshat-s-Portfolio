@@ -8,15 +8,18 @@ interface AnimatedCounterProps {
   duration?: number
   suffix?: string
   className?: string
+  startFrom?: number
 }
 
 export function AnimatedCounter({ 
   end, 
   duration = 2, 
   suffix = '', 
-  className = '' 
+  className = '',
+  startFrom
 }: AnimatedCounterProps) {
-  const [count, setCount] = useState(0)
+  // Start from actual value if provided to avoid showing 0 during load
+  const [count, setCount] = useState(startFrom !== undefined ? startFrom : end)
   const ref = useRef<HTMLSpanElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const hasAnimated = useRef(false)
@@ -26,6 +29,7 @@ export function AnimatedCounter({
       hasAnimated.current = true
       const startTime = Date.now()
       const endTime = startTime + duration * 1000
+      const initialValue = startFrom !== undefined ? startFrom : 0
 
       const animate = () => {
         const now = Date.now()
@@ -33,7 +37,7 @@ export function AnimatedCounter({
         
         // Easing function for smooth animation
         const easeOutQuart = 1 - Math.pow(1 - progress, 4)
-        const currentCount = Math.floor(easeOutQuart * end)
+        const currentCount = Math.floor(initialValue + easeOutQuart * (end - initialValue))
         
         setCount(currentCount)
 
@@ -46,7 +50,7 @@ export function AnimatedCounter({
 
       requestAnimationFrame(animate)
     }
-  }, [isInView, end, duration])
+  }, [isInView, end, duration, startFrom])
 
   return (
     <motion.span

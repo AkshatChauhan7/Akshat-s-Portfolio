@@ -8,9 +8,11 @@ interface MagneticButtonProps {
   className?: string
   onClick?: () => void
   href?: string
+  target?: string
+  rel?: string
 }
 
-export function MagneticButton({ children, className = '', onClick, href }: MagneticButtonProps) {
+export function MagneticButton({ children, className = '', onClick, href, target, rel }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [position, setPosition] = useState({ x: 0, y: 0 })
 
@@ -38,6 +40,8 @@ export function MagneticButton({ children, className = '', onClick, href }: Magn
     >
       <Component
         href={href}
+        target={target}
+        rel={rel}
         onClick={onClick}
         animate={{ x: position.x, y: position.y }}
         transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}

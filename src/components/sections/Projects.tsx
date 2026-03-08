@@ -7,8 +7,8 @@ const projects = [
   {
     id: 1,
     title: 'Calorie.io',
-    description: 'A comprehensive fitness tracking application for health enthusiasts. Users can create accounts, track daily calories, create custom recipes, and monitor their fitness journey with more features planned.',
-    techStack: ['JavaScript', 'HTML', 'CSS', 'Node.js', 'Database'],
+    description: 'Full-stack MERN application that processes real-time nutritional data, featuring secure user authentication and custom recipe scaling.',
+    techStack: ['JavaScript', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs'],
     githubUrl: 'https://github.com/AkshatChauhan7/Calorie.io',
     demoUrl: 'https://calorieio.netlify.app/',
     featured: true
@@ -17,7 +17,7 @@ const projects = [
     id: 2,
     title: 'Fitness Tracker - BeFit',
     description: 'A JavaFX application with MySQL backend for comprehensive fitness tracking. Log workouts, meals, and fitness data with an intuitive desktop interface.',
-    techStack: ['Java', 'JavaFX', 'MySQL', 'Desktop App'],
+    techStack: ['Java', 'JavaFX', 'MySQL', 'JDBC'],
     githubUrl: 'https://github.com/AkshatChauhan7/Fitness-Tracker---BeFit',
     demoUrl: '#',
     featured: true
@@ -35,7 +35,7 @@ const projects = [
     id: 4,
     title: 'Time Tracker Pro',
     description: 'A productivity application to track time spent on various tasks and projects, helping users optimize their workflow and productivity.',
-    techStack: ['JavaScript', 'HTML', 'CSS', 'Web APIs'],
+    techStack: ['JavaScript', 'HTML', 'CSS', 'LocalStorage API', 'Chart.js'],
     githubUrl: 'https://github.com/AkshatChauhan7/Time-Tracker-Pro',
     demoUrl: '#',
     featured: false
