@@ -99,6 +99,26 @@ export const certificates: Certificate[] = [
     fullImageUrl: '/Certificates/eCertificate (1).pdf',
     category: 'AI/ML',
     description: 'Advanced certification in emerging technologies and innovative development practices.'
+  },
+  {
+    id: 'coursera-os-poweruser',
+    title: 'Operating System Power User',
+    issuer: 'Coursera',
+    date: '2025',
+    thumbnailUrl: '/Certificates/Coursera OS certificate.pdf',
+    fullImageUrl: '/Certificates/Coursera OS certificate.pdf',
+    category: 'Software Engineering',
+    description: 'Certification in operating system concepts, system administration, and advanced OS features.'
+  },
+  {
+    id: 'coursera-microprocessors',
+    title: 'Introduction to Microprocessors',
+    issuer: 'Coursera',
+    date: '2025',
+    thumbnailUrl: '/Certificates/Coursera introduction to microprocessors.pdf',
+    fullImageUrl: '/Certificates/Coursera introduction to microprocessors.pdf',
+    category: 'Programming',
+    description: 'Foundation certification in microprocessor architecture, assembly language, and computer organization.'
   }
 ];
 
