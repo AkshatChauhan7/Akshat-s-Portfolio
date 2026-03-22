@@ -119,6 +119,16 @@ export const certificates: Certificate[] = [
     fullImageUrl: '/Certificates/Coursera introduction to microprocessors.pdf',
     category: 'Programming',
     description: 'Foundation certification in microprocessor architecture, assembly language, and computer organization.'
+  },
+  {
+    id: 'computer-networks',
+    title: 'Computer Networks',
+    issuer: 'Coursera',
+    date: '2025',
+    thumbnailUrl: '/Certificates/computer networks.pdf',
+    fullImageUrl: '/Certificates/computer networks.pdf',
+    category: 'Software Engineering',
+    description: 'Comprehensive certification in computer networks, protocols, and network architecture.'
   }
 ];
 
