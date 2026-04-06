@@ -8,12 +8,16 @@
     padding: 0;
     box-sizing: border-box;
   }
-  
+
   body {
     @apply bg-black text-white;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  
+
   html {
     scroll-behavior: smooth;
   }
@@ -21,303 +25,50 @@
 
 @layer components {
   .glass-card {
-    @apply bg-glass-white backdrop-blur-xl border border-white/20 shadow-xl;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    background: transparent;
   }
-  
-  .glass-button {
-    @apply bg-glass-medium backdrop-blur-xl border border-white/30 hover:bg-glass-white transition-all duration-300;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
-  }
-  
-  .gradient-text {
-    @apply bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 bg-clip-text text-transparent;
-    animation: gradient-shift 3s ease-in-out infinite;
-  }
-  
-  .glow-effect {
-    @apply shadow-2xl shadow-primary-500/25;
-    box-shadow: 
-      0 0 20px rgba(139, 92, 246, 0.15),
-      0 0 40px rgba(139, 92, 246, 0.1),
-      0 0 80px rgba(139, 92, 246, 0.05);
-  }
-  
-  .glow-text {
-    text-shadow: 
-      0 0 10px rgba(139, 92, 246, 0.5),
-      0 0 20px rgba(139, 92, 246, 0.3),
-      0 0 40px rgba(139, 92, 246, 0.1);
-  }
-  
-  /* Enhanced floating animation */
-  .floating {
-    animation: floating 6s ease-in-out infinite;
-  }
-  
-  .floating-delayed {
-    animation: floating 6s ease-in-out infinite;
-    animation-delay: -3s;
-  }
-  
-  /* Magnetic hover effect */
-  .magnetic-hover {
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  
-  .magnetic-hover:hover {
-    transform: scale(1.05) translateY(-5px);
-  }
-  
-  /* Custom scrollbar */
+
+  /* Custom scrollbar - minimal and clean */
   ::-webkit-scrollbar {
     width: 8px;
   }
-  
+
   ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
+    background: transparent;
   }
-  
+
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #8b5cf6, #a78bfa);
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #7c3aed, #8b5cf6);
+    background: rgba(255, 255, 255, 0.3);
   }
 
   /* Section spacing */
   section {
-    scroll-margin-top: 100px;
-  }
-
-  /* Text utilities */
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    scroll-margin-top: 80px;
   }
 }
 
-@keyframes gradient-shift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-@keyframes floating {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.25);
-  }
-}
-
-/* Animated gradient border */
-@keyframes gradient-x {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.animate-gradient-x {
-  background-size: 200% 200%;
-  animation: gradient-x 3s ease infinite;
-}
-
-/* Noise texture overlay for depth */
-.noise-overlay::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Spotlight gradient effect */
-.spotlight {
-  position: relative;
-  overflow: hidden;
-}
-
-.spotlight::before {
-  content: '';
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  top: -50%;
-  left: -50%;
-  background: radial-gradient(circle at center, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-  animation: spotlight-move 10s ease-in-out infinite;
-}
-
-@keyframes spotlight-move {
-  0%, 100% { transform: translate(-25%, -25%); }
-  25% { transform: translate(25%, -25%); }
-  50% { transform: translate(25%, 25%); }
-  75% { transform: translate(-25%, 25%); }
-}
-
-/* Enhanced glass card with border glow */
-.glass-card-glow {
-  @apply bg-glass-white backdrop-blur-xl border border-white/20 shadow-xl;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-  position: relative;
-}
-
-.glass-card-glow::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.5), rgba(233, 121, 249, 0.5), rgba(139, 92, 246, 0.5));
-  border-radius: inherit;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.glass-card-glow:hover::before {
-  opacity: 1;
-}
-
-/* Shimmer effect for loading/accents */
-.shimmer {
-  position: relative;
-  overflow: hidden;
-}
-
-.shimmer::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-  100% { left: 150%; }
-}
-
-/* Text gradient with animated shine */
-.text-shine {
-  background: linear-gradient(
-    90deg,
-    rgba(139, 92, 246, 1) 0%,
-    rgba(233, 121, 249, 1) 25%,
-    rgba(139, 92, 246, 1) 50%,
-    rgba(233, 121, 249, 1) 75%,
-    rgba(139, 92, 246, 1) 100%
-  );
-  background-size: 200% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: text-shine 3s linear infinite;
-}
-
-@keyframes text-shine {
-  to { background-position: 200% center; }
-}
-
-/* 3D perspective hover */
-.perspective-card {
-  perspective: 1000px;
-}
-
-.perspective-card-inner {
-  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-  transform-style: preserve-3d;
-}
-
-.perspective-card:hover .perspective-card-inner {
-  transform: rotateY(5deg) rotateX(5deg);
-}
-
-/* Blob animation for backgrounds */
+/* Remove unnecessary animations */
 .blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  animation: blob-float 8s ease-in-out infinite;
+  display: none !important;
 }
 
-@keyframes blob-float {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
+/* Link styles */
+a {
+  transition: color 0.2s;
 }
 
-/* Underline animation for links */
-.animated-underline {
-  position: relative;
-}
-
-.animated-underline::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #8b5cf6, #e879f9);
-  transition: width 0.3s ease;
-}
-
-.animated-underline:hover::after {
-  width: 100%;
-}
-
-/* Section divider with gradient */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
-}
-
-/* ========================================
-   ACCESSIBILITY IMPROVEMENTS
-   ======================================== */
-
-/* Focus visible styles for keyboard navigation */
-*:focus-visible {
-  outline: 2px solid rgba(139, 92, 246, 0.8);
+/* Focus styles for accessibility */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
   outline-offset: 2px;
 }
 
-/* Remove focus outline for mouse users */
-*:focus:not(:focus-visible) {
-  outline: none;
-}
-
-/* Screen reader only utility */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -330,18 +81,6 @@
   border: 0;
 }
 
-/* Skip link styles */
-.sr-only:focus {
-  position: absolute;
-  width: auto;
-  height: auto;
-  padding: 1rem;
-  margin: 0;
-  overflow: visible;
-  clip: auto;
-  white-space: normal;
-}
-
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -352,112 +91,14 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
-  .blob,
-  .shimmer::after,
-  .floating {
-    animation: none !important;
-  }
 }
 
-/* ========================================
-   MOBILE OPTIMIZATIONS
-   ======================================== */
-
-/* Improve touch targets on mobile */
-@media (max-width: 640px) {
-  button,
-  a,
-  [role="button"] {
-    min-height: 44px;
-    min-width: 44px;
-  }
-  
-  /* Reduce blob sizes on mobile for performance */
-  .blob {
-    filter: blur(40px);
-    opacity: 0.5;
-  }
-  
-  /* Adjust glass card padding on mobile */
-  .glass-card {
-    @apply p-4;
-  }
-  
-  /* Smaller section spacing on mobile */
-  section {
-    scroll-margin-top: 70px;
-  }
-  
-  /* Better tap feedback */
-  button:active,
-  a:active,
-  [role="button"]:active {
-    transform: scale(0.98);
-    transition: transform 0.1s ease;
-  }
-  
-  /* Prevent text selection on interactive elements */
-  button,
-  [role="button"] {
-    -webkit-user-select: none;
-    user-select: none;
-  }
-  
-  /* Fix horizontal overflow */
-  body {
-    overflow-x: hidden;
-  }
-  
-  /* Improve readability on small screens */
-  p, li {
-    line-height: 1.7;
-  }
+/* Focus for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
 }
 
-/* Medium screens */
-@media (min-width: 641px) and (max-width: 1024px) {
-  .blob {
-    filter: blur(60px);
-  }
-}
-
-/* Safe area insets for notched devices */
-@supports (padding: max(0px)) {
-  .nav-container {
-    padding-left: max(1.5rem, env(safe-area-inset-left));
-    padding-right: max(1.5rem, env(safe-area-inset-right));
-  }
-  
-  section {
-    padding-left: max(1rem, env(safe-area-inset-left));
-    padding-right: max(1rem, env(safe-area-inset-right));
-  }
-}
-
-/* Improved touch scrolling */
-.overflow-y-auto,
-.overflow-x-auto {
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Better mobile input styling */
-@media (max-width: 640px) {
-  input,
-  textarea,
-  select {
-    font-size: 16px !important; /* Prevents iOS zoom on focus */
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .glass-card {
-    border: 2px solid rgba(255, 255, 255, 0.5);
-  }
-  
-  .gradient-text {
-    -webkit-text-fill-color: white;
-    color: white;
-  }
+*:focus:not(:focus-visible) {
+  outline: none;
 }

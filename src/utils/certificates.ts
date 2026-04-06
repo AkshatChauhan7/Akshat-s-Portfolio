@@ -125,10 +125,20 @@ export const certificates: Certificate[] = [
     title: 'Computer Networks',
     issuer: 'Coursera',
     date: '2025',
-    thumbnailUrl: '/Certificates/computer networks.pdf',
-    fullImageUrl: '/Certificates/computer networks.pdf',
+    thumbnailUrl: '/Certificates/S24CSEU1814_B46_AKSHATCHAUHAN.pdf',
+    fullImageUrl: '/Certificates/S24CSEU1814_B46_AKSHATCHAUHAN.pdf',
     category: 'Software Engineering',
     description: 'Comprehensive certification in computer networks, protocols, and network architecture.'
+  },
+  {
+    id: 'coursera-dti',
+    title: 'Design Thinking and Innovation',
+    issuer: 'Coursera',
+    date: '2026',
+    thumbnailUrl: '/Certificates/Coursera DTI.pdf',
+    fullImageUrl: '/Certificates/Coursera DTI.pdf',
+    category: 'Software Engineering',
+    description: 'Certification in design thinking methodologies, innovation frameworks, and creative problem-solving.'
   }
 ];
 
