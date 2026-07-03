@@ -92,7 +92,7 @@ export function HeroEnhanced() {
               </motion.a>
               
               <motion.a
-                href="/resume.pdf"
+                href="/Akshat_Chauhan_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}

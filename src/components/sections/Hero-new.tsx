@@ -68,7 +68,7 @@ export function Hero() {
               </motion.a>
               
               <motion.a
-                href="/resume.pdf"
+                href="/Akshat_Chauhan_Resume.pdf"
                 target="_blank"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

@@ -114,7 +114,7 @@ export function Hero() {
               </div>
               
               <MagneticButton
-                href="/resume.pdf"
+                href="/Akshat_Chauhan_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center space-x-2 px-8 py-4 glass-card-glow border border-white/20 text-white rounded-2xl font-semibold hover:glow-effect transition-all duration-300"
