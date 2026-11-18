@@ -1,9 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { 
-  CogIcon, 
-  BoltIcon, 
+import {
+  CogIcon,
+  BoltIcon,
   ClockIcon,
   ChartBarIcon,
   ArrowPathIcon,
@@ -35,66 +35,61 @@ const automationWorkflows = [
 
 export function Automation() {
   return (
-    <section id="automation" className="py-24 relative">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+    <section id="automation" className="py-20 md:py-28 lg:py-36 relative">
+      <div className="container-editorial">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-16 md:mb-24"
         >
-          <div className="flex items-center justify-center mb-6">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="mr-4"
-            >
-              <CogIcon className="w-12 h-12 text-primary-500" />
-            </motion.div>
-            <h2 className="text-4xl sm:text-5xl font-bold gradient-text">
-              n8n Automation
+          <div className="flex items-baseline gap-4 mb-6">
+            <span className="caption text-accent">05</span>
+            <h2 className="heading-1">
+              n8n <span className="text-accent">Automation</span>
             </h2>
           </div>
-          <p className="text-white/60 text-lg max-w-3xl mx-auto">
-            Streamlining workflows and solving real problems through intelligent automation. 
+          <p className="body-lg text-fg-secondary max-w-2xl leading-relaxed">
+            Streamlining workflows and solving real problems through intelligent automation.
             Building systems that work while I focus on what matters most.
           </p>
         </motion.div>
 
-
-
         {/* Automation Workflows */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 mb-16">
           {automationWorkflows.map((workflow, index) => (
             <motion.div
               key={workflow.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="glass-card p-6 sm:p-8 rounded-3xl group hover:glow-effect transition-all duration-500"
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.6, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -8 }}
+              className="lg:col-span-6 card-editorial p-8 rounded-2xl group"
             >
               {/* Header */}
               <div className="flex items-start justify-between mb-6">
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-4 pr-8">
+                  <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent/20 transition-colors duration-300">
+                    <CogIcon className="w-7 h-7" aria-hidden="true" />
+                  </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white group-hover:gradient-text transition-all duration-300">
+                    <h3 className="heading-3 text-fg-primary group-hover:text-accent transition-colors duration-300">
                       {workflow.title}
                     </h3>
                     <div className="flex items-center space-x-2 mt-2">
-                      <span className={`px-2 py-1 rounded text-xs font-medium ${
-                        workflow.complexity === 'Beginner' 
-                          ? 'bg-green-500/20 text-green-400' 
+                      <span className={`caption px-2 py-1 rounded ${
+                        workflow.complexity === 'Beginner'
+                          ? 'bg-green-500/20 text-green-400'
                           : workflow.complexity === 'Intermediate'
                           ? 'bg-yellow-500/20 text-yellow-400'
                           : 'bg-red-500/20 text-red-400'
                       }`}>
                         {workflow.complexity}
                       </span>
-                      <span className="px-2 py-1 bg-primary-500/20 text-primary-400 rounded text-xs font-medium">
+                      <span className="caption px-2 py-1 bg-accent/20 text-accent rounded">
                         {workflow.status}
                       </span>
                     </div>
@@ -104,31 +99,32 @@ export function Automation() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => window.open(workflow.githubLink, '_blank')}
-                  className="p-2 glass-button rounded-full text-primary-400 hover:text-primary-300"
+                  className="p-3 rounded-lg bg-card border border-border text-fg-muted hover:text-accent hover:border-accent transition-all duration-300"
                   title="View Workflow on GitHub"
+                  aria-label={`View ${workflow.title} on GitHub`}
                 >
                   <PlayIcon className="w-5 h-5" />
                 </motion.button>
               </div>
 
               {/* Description */}
-              <p className="text-white/80 leading-relaxed mb-6">
+              <p className="body-md text-fg-secondary leading-relaxed mb-6">
                 {workflow.description}
               </p>
 
               {/* Tools Used */}
               <div className="mb-6">
-                <h4 className="text-white font-medium mb-3">Tools & Integrations</h4>
+                <h4 className="heading-4 text-fg-primary mb-3">Tools & Integrations</h4>
                 <div className="flex flex-wrap gap-2">
                   {workflow.tools.map((tool, toolIndex) => (
                     <motion.span
                       key={tool}
-                      initial={{ opacity: 0, scale: 0.8 }}
+                      initial={{ opacity: 0, scale: 0.9 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: (index * 0.1) + (toolIndex * 0.05) }}
+                      transition={{ duration: 0.3, delay: (index * 0.1) + (toolIndex * 0.04), ease: [0.16, 1, 0.3, 1] }}
                       whileHover={{ scale: 1.05 }}
-                      className="px-3 py-1 bg-glass-light rounded-full text-primary-300 text-sm font-medium border border-primary-400/20 hover:border-primary-400/40 transition-all duration-200"
+                      className="px-3 py-1.5 rounded-full bg-card border border-border text-fg-secondary text-sm font-medium hover:border-accent hover:text-accent transition-all duration-200"
                     >
                       {tool}
                     </motion.span>
@@ -138,7 +134,7 @@ export function Automation() {
 
               {/* Benefits */}
               <div>
-                <h4 className="text-white font-medium mb-3">Key Benefits</h4>
+                <h4 className="heading-4 text-fg-primary mb-3">Key Benefits</h4>
                 <div className="space-y-2">
                   {workflow.benefits.map((benefit, benefitIndex) => (
                     <motion.div
@@ -146,11 +142,11 @@ export function Automation() {
                       initial={{ opacity: 0, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: (index * 0.1) + (benefitIndex * 0.1) }}
-                      className="flex items-center space-x-2"
+                      transition={{ duration: 0.4, delay: (index * 0.1) + (benefitIndex * 0.08), ease: [0.16, 1, 0.3, 1] }}
+                      className="flex items-center gap-2"
                     >
-                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full" />
-                      <span className="text-white/70 text-sm">{benefit}</span>
+                      <div className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+                      <span className="body-sm text-fg-secondary">{benefit}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -161,26 +157,24 @@ export function Automation() {
 
         {/* Call to Action */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mt-16"
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center"
         >
-          <div className="glass-card p-8 rounded-3xl max-w-3xl mx-auto">
-            <h3 className="text-2xl font-semibold text-white mb-4">
-              Automate Your Workflow
-            </h3>
-            <p className="text-white/70 mb-6">
-              Interested in automation solutions for your business or personal projects? 
+          <div className="card-editorial p-10 md:p-16 rounded-2xl max-w-3xl mx-auto">
+            <h3 className="heading-2 text-fg-primary mb-4">Automate Your Workflow</h3>
+            <p className="body-lg text-fg-secondary mb-8 max-w-xl mx-auto">
+              Interested in automation solutions for your business or personal projects?
               Let's discuss how we can streamline your processes and save valuable time.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
                 href="#contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl text-white font-medium hover:shadow-xl hover:shadow-primary-500/50 transition-all duration-300"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-primary"
               >
                 Discuss Automation
               </motion.a>
@@ -188,9 +182,9 @@ export function Automation() {
                 href="https://github.com/AkshatChauhan7/workkflow"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 glass-button rounded-xl text-primary-400 hover:text-primary-300 font-medium border border-primary-400/30 hover:border-primary-400/60 transition-all duration-300"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-secondary"
               >
                 View Workflows
               </motion.a>

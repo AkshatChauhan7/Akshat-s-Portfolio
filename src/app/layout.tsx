@@ -1,26 +1,34 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Space_Grotesk, Inter } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ 
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter'
+  variable: '--font-display',
+  weight: ['300', '400', '500', '600', '700'],
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
+  weight: ['300', '400', '500', '600'],
 })
 
 export const metadata: Metadata = {
-  title: 'Portfolio | AI Engineer & Developer',
-  description: 'Professional portfolio showcasing AI/ML engineering expertise and innovative projects',
-  keywords: ['AI Engineer', 'Machine Learning', 'Software Developer', 'Portfolio'],
-  authors: [{ name: 'Portfolio Owner' }],
-  creator: 'Portfolio Owner',
+  title: 'Akshat Chauhan | Portfolio',
+  description: 'Computer Science student passionate about building efficient solutions, web development, competitive programming, and automation.',
+  keywords: ['Software Developer', 'Computer Science', 'Full Stack', 'Competitive Programming', 'Automation', 'Portfolio'],
+  authors: [{ name: 'Akshat Chauhan' }],
+  creator: 'Akshat Chauhan',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://your-domain.com',
-    title: 'Portfolio | AI Engineer & Developer',
-    description: 'Professional portfolio showcasing AI/ML engineering expertise and innovative projects',
-    siteName: 'Professional Portfolio',
+    url: 'https://akshatchauhan.dev',
+    title: 'Akshat Chauhan | Portfolio',
+    description: 'Computer Science student passionate about building efficient solutions and automating the world, one line of code at a time.',
+    siteName: 'Akshat Chauhan Portfolio',
   },
 }
 
@@ -30,11 +38,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className={`${inter.className} antialiased`}>
-        <div className="min-h-screen bg-gradient-to-br from-black via-primary-900/20 to-black">
-          {children}
-        </div>
+    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable}`}>
+      <body className="font-sans antialiased">
+        {children}
       </body>
     </html>
   )

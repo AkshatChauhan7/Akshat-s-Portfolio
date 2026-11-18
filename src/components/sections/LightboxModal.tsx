@@ -30,66 +30,66 @@ export function LightboxModal({ certificate, isOpen, onClose }: LightboxModalPro
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg-primary/90 backdrop-blur-sm"
           onClick={handleBackdropClick}
         >
           {/* Modal Container */}
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
+            initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="relative w-full max-w-5xl max-h-[95vh] sm:max-h-[90vh] glass-card rounded-2xl sm:rounded-2xl rounded-t-2xl overflow-hidden mx-2 sm:mx-0"
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="relative w-full max-w-5xl max-h-[95vh] sm:max-h-[90vh] card-editorial rounded-2xl overflow-hidden"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 sm:p-6 border-b border-white/10">
-              <div className="flex-1 min-w-0">
-                <h3 className="text-lg sm:text-xl font-semibold text-white mb-1 truncate">
+            <div className="flex items-center justify-between p-6 border-b border-border">
+              <div className="flex-1 min-w-0 pr-4">
+                <h3 className="heading-3 text-fg-primary mb-1 truncate">
                   {certificate.title}
                 </h3>
-                <p className="text-primary-300 text-sm sm:text-base truncate">
+                <p className="body-sm text-fg-muted truncate">
                   {certificate.issuer} • {certificate.date}
                 </p>
               </div>
-              <div className="flex items-center gap-2 sm:gap-3 ml-4">
+              <div className="flex items-center gap-2">
                 {/* Open in New Tab Button */}
                 <button
                   onClick={() => window.open(certificate.fullImageUrl, '_blank')}
-                  className="glass-button p-2 rounded-lg hover:scale-105 transition-all duration-200 touch-manipulation"
+                  className="p-2 rounded-lg bg-card border border-border text-fg-secondary hover:text-accent hover:border-accent transition-all duration-200"
                   aria-label="Open certificate in new tab"
                 >
-                  <ArrowTopRightOnSquareIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                  <ArrowTopRightOnSquareIcon className="w-5 h-5" />
                 </button>
-                
+
                 {/* Close Button */}
                 <button
                   onClick={onClose}
-                  className="glass-button p-2 rounded-lg hover:scale-105 transition-all duration-200 touch-manipulation"
+                  className="p-2 rounded-lg bg-card border border-border text-fg-secondary hover:text-fg-primary hover:border-border-light transition-all duration-200"
                   aria-label="Close modal"
                 >
-                  <XMarkIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                  <XMarkIcon className="w-5 h-5" />
                 </button>
               </div>
             </div>
 
             {/* Content */}
-            <div className="p-3 sm:p-6">
+            <div className="p-6">
               <div className="relative">
                 {/* Loading Spinner */}
                 {isLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-glass-dark rounded-lg">
-                    <div className="w-8 h-8 border-2 border-primary-400 border-t-transparent rounded-full animate-spin"></div>
+                  <div className="absolute inset-0 flex items-center justify-center bg-card border border-border rounded-xl z-10">
+                    <div className="w-10 h-10 border-2 border-accent border-t-transparent rounded-full animate-spin"></div>
                   </div>
                 )}
 
                 {/* Certificate Viewer */}
-                <div className="relative rounded-lg overflow-hidden bg-white">
+                <div className="relative rounded-xl overflow-hidden bg-card">
                   <iframe
                     src={`${certificate.fullImageUrl}#toolbar=0&navpanes=0&scrollbar=0&page=1&zoom=FitH`}
                     className="w-full border-0"
                     title={`${certificate.title} Certificate`}
                     onLoad={() => setIsLoading(false)}
-                    style={{ 
+                    style={{
                       height: window.innerWidth < 768 ? '50vh' : '70vh',
                       minHeight: window.innerWidth < 768 ? '300px' : '500px',
                       objectFit: 'contain'
@@ -99,8 +99,8 @@ export function LightboxModal({ certificate, isOpen, onClose }: LightboxModalPro
 
                 {/* Certificate Info */}
                 {certificate.description && (
-                  <div className="mt-3 sm:mt-4 p-3 sm:p-4 glass-card rounded-lg">
-                    <p className="text-white/80 leading-relaxed text-sm sm:text-base">
+                  <div className="mt-4 p-4 rounded-xl bg-card border border-border">
+                    <p className="body-md text-fg-secondary leading-relaxed">
                       {certificate.description}
                     </p>
                   </div>
@@ -109,19 +109,20 @@ export function LightboxModal({ certificate, isOpen, onClose }: LightboxModalPro
             </div>
 
             {/* Footer */}
-            <div className="px-3 pb-3 sm:px-6 sm:pb-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0">
+            <div className="px-6 pb-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 text-xs font-medium rounded-full bg-primary-500/20 text-primary-300 border border-primary-400/30">
+                  <span className="caption px-3 py-1 rounded-full bg-accent/10 text-accent border border-accent/20">
                     {certificate.category}
                   </span>
                 </div>
-                
+
                 <button
                   onClick={() => window.open(certificate.fullImageUrl, '_blank')}
-                  className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-white hover:bg-primary-500/20 transition-all duration-200 touch-manipulation"
+                  className="btn-secondary px-6 py-2 text-sm"
                 >
-                  Download Certificate
+                  <ArrowTopRightOnSquareIcon className="w-4 h-4 mr-2" />
+                  View Full Certificate
                 </button>
               </div>
             </div>

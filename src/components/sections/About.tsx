@@ -5,90 +5,140 @@ import { SparklesIcon, CpuChipIcon, CodeBracketIcon } from '@heroicons/react/24/
 
 export function About() {
   return (
-    <section id="about" className="py-24 relative">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
-        {/* Section Header */}
+    <section id="about" className="py-20 md:py-28 lg:py-36 relative">
+      <div className="container-editorial">
+        {/* Section Header - Asymmetric */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-16 md:mb-24"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold gradient-text mb-6">
-            About Me
-          </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+          <div className="flex items-baseline gap-4 mb-6">
+            <span className="caption text-accent">01</span>
+            <h2 className="heading-1">
+              About <span className="text-accent">Me</span>
+            </h2>
+          </div>
+          <p className="body-lg text-fg-secondary max-w-xl leading-relaxed">
             Passionate about creating intelligent solutions and scalable systems
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Content */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Main Content - 7 columns */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 lg:col-start-1 space-y-8"
           >
-            <div className="glass-card p-8 rounded-3xl">
-              <h3 className="text-2xl font-semibold text-white mb-4">
-                Student & Builder
-              </h3>
-              <p className="text-white/80 leading-relaxed mb-6">
-                I'm a Computer Science student passionate about turning ideas into working, impactful solutions. 
-                I believe in building real-world projects to learn deeply, solve actual problems, 
-                and refine both technical and creative skills.
-              </p>
-              <p className="text-white/80 leading-relaxed">
-                Currently exploring web development, competitive programming, and automation tools like n8n. 
-                I focus on fitness tech applications and creating user experiences that make a difference.
-              </p>
+            <div className="card-editorial p-8 md:p-12 rounded-2xl">
+              <h3 className="heading-3 text-fg-primary mb-6">Student & Builder</h3>
+              <div className="space-y-6 text-fg-secondary leading-relaxed body-md">
+                <p>
+                  I'm a Computer Science student passionate about turning ideas into working, impactful solutions.
+                  I believe in building real-world projects to learn deeply, solve actual problems,
+                  and refine both technical and creative skills.
+                </p>
+                <p>
+                  Currently exploring web development, competitive programming, and automation tools like n8n.
+                  I focus on fitness tech applications and creating user experiences that make a difference.
+                </p>
+              </div>
+            </div>
+
+            {/* Focus Areas */}
+            <div className="grid md:grid-cols-3 gap-4">
+              {[
+                {
+                  icon: CodeBracketIcon,
+                  title: 'Web Development',
+                  description: 'Building full-stack applications with JavaScript, HTML, CSS, and modern frameworks'
+                },
+                {
+                  icon: CpuChipIcon,
+                  title: 'Problem Solving',
+                  description: 'Active in competitive programming and DSA using C++ on platforms like LeetCode'
+                },
+                {
+                  icon: SparklesIcon,
+                  title: 'Project Builder',
+                  description: 'Creating real-world projects like fitness trackers and automation tools'
+                }
+              ].map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.6, delay: 0.2 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={{ y: -4 }}
+                  className="card-editorial p-6 rounded-xl group"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent/20 transition-colors duration-300">
+                      <feature.icon className="w-6 h-6" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h4 className="heading-4 text-fg-primary mb-2 group-hover:text-accent transition-colors duration-300">
+                        {feature.title}
+                      </h4>
+                      <p className="body-sm text-fg-muted leading-relaxed">{feature.description}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 
-          {/* Features */}
+          {/* Side accent - 4 columns, offset */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-4 lg:col-start-9 hidden lg:block"
           >
-            {[
-              {
-                icon: <CodeBracketIcon className="w-8 h-8" />,
-                title: 'Web Development',
-                description: 'Building full-stack applications with JavaScript, HTML, CSS, and modern frameworks'
-              },
-              {
-                icon: <CpuChipIcon className="w-8 h-8" />,
-                title: 'Problem Solving',
-                description: 'Active in competitive programming and DSA using C++ on platforms like LeetCode'
-              },
-              {
-                icon: <SparklesIcon className="w-8 h-8" />,
-                title: 'Project Builder',
-                description: 'Creating real-world projects like fitness trackers and automation tools'
-              }
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ y: -5 }}
-                className="glass-card p-6 rounded-2xl group hover:glow-effect transition-all duration-300"
-              >
-                <div className="flex items-center space-x-4">
-                  <div className="text-primary-400 group-hover:text-primary-300 transition-colors duration-300">
-                    {feature.icon}
-                  </div>
-                  <div>
-                    <h4 className="text-white font-semibold text-lg mb-2">{feature.title}</h4>
-                    <p className="text-white/70 text-sm">{feature.description}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+            <div className="sticky top-32 space-y-6">
+              <div className="card-editorial p-6 rounded-xl border-l-4 border-accent">
+                <p className="caption text-accent mb-2">Currently</p>
+                <p className="body-md text-fg-secondary leading-relaxed">
+                  Exploring web development, competitive programming, and automation tools like n8n.
+                  Focused on fitness tech applications.
+                </p>
+              </div>
+
+              <div className="card-editorial p-6 rounded-xl">
+                <p className="caption text-fg-muted mb-4">Learning Focus</p>
+                <ul className="space-y-3">
+                  {[
+                    'Advanced React Patterns',
+                    'System Design Fundamentals',
+                    'n8n Workflow Automation',
+                    'Competitive Programming (C++)'
+                  ].map((item, index) => (
+                    <li key={index} className="flex items-center gap-3 text-fg-secondary body-sm group">
+                      <motion.div
+                        whileHover={{ scale: 1.2 }}
+                        className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="card-editorial p-6 rounded-xl bg-tertiary">
+                <p className="caption text-fg-muted mb-4">Philosophy</p>
+                <blockquote className="body-md text-fg-secondary italic leading-relaxed border-l-2 border-accent pl-4">
+                  "Be Better Everyday!"
+                </blockquote>
+                <p className="caption text-accent mt-4 text-right">— Personal mantra</p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>

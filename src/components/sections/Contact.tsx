@@ -2,9 +2,9 @@
 
 import { motion } from 'framer-motion'
 import { useState, useRef } from 'react'
-import { 
-  EnvelopeIcon, 
-  PhoneIcon, 
+import {
+  EnvelopeIcon,
+  PhoneIcon,
   MapPinIcon,
   PaperAirplaneIcon,
   CheckCircleIcon,
@@ -54,7 +54,7 @@ export function Contact() {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitStatus('idle')
-    
+
     // Form validation
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setSubmitStatus('error')
@@ -66,7 +66,7 @@ export function Contact() {
       }, 5000)
       return
     }
-    
+
     try {
       // Send email using Web3Forms API
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -85,9 +85,9 @@ export function Contact() {
           replyto: formData.email
         })
       })
-      
+
       const result = await response.json()
-      
+
       if (response.ok && result.success) {
         setSubmitStatus('success')
         setStatusMessage('Message sent successfully! I\'ll get back to you soon.')
@@ -95,10 +95,10 @@ export function Contact() {
       } else {
         throw new Error(result.message || 'Failed to send message')
       }
-      
+
     } catch (error) {
       console.error('Email sending error:', error)
-      
+
       // Fallback to mailto if Web3Forms fails
       const subject = encodeURIComponent(`Portfolio Contact: ${formData.subject}`)
       const body = encodeURIComponent(
@@ -111,14 +111,14 @@ export function Contact() {
         `Message:\n${formData.message}\n\n` +
         `Best regards,\n${formData.name}`
       )
-      
+
       const mailtoLink = `mailto:chauhanakshat50@gmail.com?subject=${subject}&body=${body}`
       window.open(mailtoLink, '_self')
-      
+
       setSubmitStatus('error')
       setStatusMessage('Email service temporarily unavailable. Your email client should open as fallback.')
     }
-    
+
     setIsSubmitting(false)
     setTimeout(() => {
       setSubmitStatus('idle')
@@ -127,65 +127,72 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-16 sm:py-24 relative min-h-screen flex flex-col justify-center" aria-labelledby="contact-heading">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <section id="contact" className="py-20 md:py-28 lg:py-36 relative min-h-[80vh] flex flex-col justify-center" aria-labelledby="contact-heading">
+      <div className="container-editorial w-full">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-8 sm:mb-12 lg:mb-16"
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-12 md:mb-16 lg:mb-20"
         >
-          <h2 id="contact-heading" className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold gradient-text mb-3 sm:mb-4 lg:mb-6">
-            Let's Work Together
-          </h2>
-          <p className="text-white/70 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-2 sm:px-4">
+          <div className="flex items-baseline gap-4 mb-6">
+            <span className="caption text-accent">09</span>
+            <h2 id="contact-heading" className="heading-1">
+              Let's <span className="text-accent">Work Together</span>
+            </h2>
+          </div>
+          <p className="body-lg text-fg-secondary max-w-2xl leading-relaxed">
             Ready to bring your ideas to life? Let's discuss how we can create something amazing together.
           </p>
         </motion.div>
 
         {/* Looking For Section */}
-        <div className="max-w-3xl mx-auto mb-8 sm:mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-2xl mx-auto mb-12 md:mb-16"
+        >
           <LookingFor />
-        </div>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16">
-          {/* Contact Info */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+          {/* Contact Info - 5 columns */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 space-y-8"
           >
-            <div className="glass-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl lg:rounded-3xl">
-              <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white mb-3 sm:mb-4 lg:mb-6">
-                Get In Touch
-              </h3>
-              <p className="text-white/80 leading-relaxed mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm lg:text-base">
-                I'm always interested in hearing about new opportunities, 
-                challenging projects, and innovative ideas. Whether you're a startup, 
+            <div className="card-editorial p-6 md:p-8 rounded-2xl">
+              <h3 className="heading-3 text-fg-primary mb-6">Get In Touch</h3>
+              <p className="body-md text-fg-secondary leading-relaxed mb-8">
+                I'm always interested in hearing about new opportunities,
+                challenging projects, and innovative ideas. Whether you're a startup,
                 established company, or fellow developer, let's connect!
               </p>
 
               {/* Contact Methods */}
-              <div className="space-y-4 sm:space-y-6">
+              <div className="space-y-5">
                 {[
                   {
-                    icon: <EnvelopeIcon className="w-6 h-6" />,
+                    icon: EnvelopeIcon,
                     label: 'Email',
                     value: 'chauhanakshat50@gmail.com',
                     href: 'mailto:chauhanakshat50@gmail.com'
                   },
                   {
-                    icon: <PhoneIcon className="w-6 h-6" />,
+                    icon: PhoneIcon,
                     label: 'Phone',
                     value: '(+91) 8868844771',
                     href: 'tel:+918868844771'
                   },
                   {
-                    icon: <MapPinIcon className="w-6 h-6" />,
+                    icon: MapPinIcon,
                     label: 'Location',
                     value: 'Greater Noida, UP, India',
                     href: '#'
@@ -194,15 +201,15 @@ export function Contact() {
                   <motion.a
                     key={contact.label}
                     href={contact.href}
-                    whileHover={{ x: 5 }}
-                    className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4 p-2 sm:p-3 lg:p-4 glass-button rounded-lg sm:rounded-xl group transition-all duration-300 hover:glow-effect"
+                    whileHover={{ x: 4 }}
+                    className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border group hover:border-accent/50 transition-all duration-300"
                   >
-                    <div className="text-primary-400 group-hover:text-primary-300 transition-colors duration-300 flex-shrink-0">
-                      <div className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6">{contact.icon}</div>
+                    <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent/20 transition-colors duration-300">
+                      <contact.icon className="w-5 h-5" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-white/60 text-xs lg:text-sm">{contact.label}</p>
-                      <p className="text-white font-medium text-xs sm:text-sm lg:text-base truncate">{contact.value}</p>
+                      <p className="caption text-fg-muted">{contact.label}</p>
+                      <p className="body-sm text-fg-primary truncate group-hover:text-accent transition-colors duration-300">{contact.value}</p>
                     </div>
                   </motion.a>
                 ))}
@@ -210,11 +217,9 @@ export function Contact() {
             </div>
 
             {/* Social Links */}
-            <div className="glass-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl lg:rounded-3xl">
-              <h4 className="text-base sm:text-lg lg:text-xl font-semibold text-white mb-3 sm:mb-4 lg:mb-6">
-                Connect Online
-              </h4>
-              <div className="grid grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
+            <div className="card-editorial p-6 md:p-8 rounded-2xl">
+              <h4 className="heading-4 text-fg-primary mb-6">Connect Online</h4>
+              <div className="grid grid-cols-2 gap-3">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={social.name}
@@ -223,33 +228,30 @@ export function Contact() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center justify-center space-x-2 sm:space-x-3 p-2 sm:p-3 lg:p-4 glass-button rounded-lg sm:rounded-xl group hover:glow-effect transition-all duration-300"
+                    className="flex items-center justify-center gap-2 p-4 rounded-xl bg-card border border-border text-fg-secondary group hover:border-accent hover:text-accent transition-all duration-300"
                   >
-                    <span className="text-white group-hover:text-primary-300 transition-colors duration-300 font-medium text-xs sm:text-sm lg:text-base">
-                      {social.name}
-                    </span>
+                    <span className="font-medium body-sm">{social.name}</span>
                   </motion.a>
                 ))}
               </div>
             </div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Contact Form - 7 columns */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7"
           >
-            <div className="glass-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl lg:rounded-3xl">
-              <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white mb-3 sm:mb-4 lg:mb-6">
-                Send a Message
-              </h3>
-              
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 lg:space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
+            <div className="card-editorial p-6 md:p-8 rounded-2xl">
+              <h3 className="heading-3 text-fg-primary mb-6">Send a Message</h3>
+
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
+                <div className="grid md:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="name" className="block text-white/80 text-xs sm:text-sm font-medium mb-1 sm:mb-2">
+                    <label htmlFor="name" className="block caption text-fg-muted mb-2">
                       Name
                     </label>
                     <input
@@ -259,12 +261,12 @@ export function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-glass-light border border-white/20 rounded-lg sm:rounded-xl text-white text-sm sm:text-base placeholder-white/50 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-card border border-border text-fg-primary placeholder-fg-muted rounded-xl focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-300"
                       placeholder="Your name"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-white/80 text-xs sm:text-sm font-medium mb-1 sm:mb-2">
+                    <label htmlFor="email" className="block caption text-fg-muted mb-2">
                       Email
                     </label>
                     <input
@@ -274,14 +276,14 @@ export function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-glass-light border border-white/20 rounded-lg sm:rounded-xl text-white text-sm sm:text-base placeholder-white/50 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-card border border-border text-fg-primary placeholder-fg-muted rounded-xl focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-300"
                       placeholder="your@email.com"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-white/80 text-xs sm:text-sm font-medium mb-1 sm:mb-2">
+                  <label htmlFor="subject" className="block caption text-fg-muted mb-2">
                     Subject
                   </label>
                   <input
@@ -291,13 +293,13 @@ export function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-glass-light border border-white/20 rounded-lg sm:rounded-xl text-white text-sm sm:text-base placeholder-white/50 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all duration-300"
+                    className="w-full px-4 py-3 bg-card border border-border text-fg-primary placeholder-fg-muted rounded-xl focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-300"
                     placeholder="Project collaboration"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-white/80 text-xs sm:text-sm font-medium mb-1 sm:mb-2">
+                  <label htmlFor="message" className="block caption text-fg-muted mb-2">
                     Message
                   </label>
                   <textarea
@@ -306,8 +308,8 @@ export function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows={4}
-                    className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-glass-light border border-white/20 rounded-lg sm:rounded-xl text-white text-sm sm:text-base placeholder-white/50 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all duration-300 resize-none min-h-[80px] sm:min-h-[120px]"
+                    rows={5}
+                    className="w-full px-4 py-3 bg-card border border-border text-fg-primary placeholder-fg-muted rounded-xl focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-300 resize-none min-h-[140px]"
                     placeholder="Tell me about your project or idea..."
                   />
                 </div>
@@ -317,18 +319,18 @@ export function Contact() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className={`p-3 sm:p-4 rounded-lg sm:rounded-xl border flex items-center space-x-2 sm:space-x-3 ${
+                    className={`p-4 rounded-xl border flex items-start gap-3 ${
                       submitStatus === 'success'
                         ? 'bg-green-500/10 border-green-500/30 text-green-400'
                         : 'bg-red-500/10 border-red-500/30 text-red-400'
                     }`}
                   >
                     {submitStatus === 'success' ? (
-                      <CheckCircleIcon className="w-5 h-5 flex-shrink-0" />
+                      <CheckCircleIcon className="w-5 h-5 flex-shrink-0 mt-0.5" />
                     ) : (
-                      <ExclamationCircleIcon className="w-5 h-5 flex-shrink-0" />
+                      <ExclamationCircleIcon className="w-5 h-5 flex-shrink-0 mt-0.5" />
                     )}
-                    <p className="text-xs sm:text-sm">{statusMessage}</p>
+                    <p className="body-sm">{statusMessage}</p>
                   </motion.div>
                 )}
 
@@ -337,18 +339,18 @@ export function Contact() {
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full relative px-4 py-3 sm:px-6 sm:py-4 lg:px-8 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-400 hover:to-primary-500 rounded-lg sm:rounded-xl text-white font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 hover:shadow-2xl hover:shadow-primary-500/50 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden group"
+                  className="w-full btn-primary py-4 text-base overflow-hidden group"
                 >
-                  <span className="relative z-10 flex items-center justify-center space-x-2">
+                  <span className="relative z-10 flex items-center justify-center gap-2">
                     {isSubmitting ? (
                       <>
-                        <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        <div className="w-5 h-5 border-2 border-bg-primary/30 border-t-bg-primary rounded-full animate-spin" />
                         <span>Sending...</span>
                       </>
                     ) : (
                       <>
                         <span>Send Message</span>
-                        <PaperAirplaneIcon className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                        <PaperAirplaneIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                       </>
                     )}
                   </span>
@@ -363,11 +365,11 @@ export function Contact() {
       <motion.footer
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="mt-12 sm:mt-16 lg:mt-24 pt-6 sm:pt-8 lg:pt-12 border-t border-white/10 text-center"
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-16 md:mt-24 lg:mt-32 pt-8 md:pt-12 lg:pt-16 border-t border-border text-center"
       >
-        <p className="text-white/60 text-xs sm:text-sm px-4">
+        <p className="body-sm text-fg-muted">
           © 2025 Akshat Chauhan. Built with Next.js, TypeScript, and Tailwind CSS.
         </p>
       </motion.footer>
