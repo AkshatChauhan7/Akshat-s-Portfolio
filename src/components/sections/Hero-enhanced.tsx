@@ -130,7 +130,7 @@ export function HeroEnhanced() {
                 <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-1 group-hover:scale-105 transition-transform duration-300">
                   <div className="relative overflow-hidden rounded-3xl">
                     <Image
-                      src="/images/me.jpeg"
+                      src="/images/pfp.png"
                       alt="Akshat Chauhan"
                       width={400}
                       height={500}

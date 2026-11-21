@@ -56,7 +56,7 @@ export function Contact() {
     setSubmitStatus('idle')
 
     // Form validation
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.subject.trim() || !formData.message.trim()) {
       setSubmitStatus('error')
       setStatusMessage('Please fill in all required fields.')
       setIsSubmitting(false)
@@ -64,6 +64,32 @@ export function Contact() {
         setSubmitStatus('idle')
         setStatusMessage('')
       }, 5000)
+      return
+    }
+
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
+
+    if (!accessKey) {
+      const subject = encodeURIComponent(`Portfolio Contact: ${formData.subject}`)
+      const body = encodeURIComponent(
+        `Hi Akshat,\n\n` +
+        `I'm reaching out to you through your portfolio contact form.\n\n` +
+        `My Details:\n` +
+        `Name: ${formData.name}\n` +
+        `Email: ${formData.email}\n` +
+        `Subject: ${formData.subject}\n\n` +
+        `Message:\n${formData.message}\n\n` +
+        `Best regards,\n${formData.name}`
+      )
+
+      window.open(`mailto:chauhanakshat50@gmail.com?subject=${subject}&body=${body}`, '_self')
+      setSubmitStatus('error')
+      setStatusMessage('Opening your email client as the contact service is not configured.')
+      setIsSubmitting(false)
+      setTimeout(() => {
+        setSubmitStatus('idle')
+        setStatusMessage('')
+      }, 8000)
       return
     }
 
@@ -76,7 +102,7 @@ export function Contact() {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
+          access_key: accessKey,
           name: formData.name,
           email: formData.email,
           subject: `Portfolio Contact: ${formData.subject}`,
@@ -195,12 +221,14 @@ export function Contact() {
                     icon: MapPinIcon,
                     label: 'Location',
                     value: 'Greater Noida, UP, India',
-                    href: '#'
+                    href: 'https://maps.google.com/?q=Greater+Noida,+Uttar+Pradesh,+India'
                   }
                 ].map((contact, index) => (
                   <motion.a
                     key={contact.label}
                     href={contact.href}
+                    target={contact.label === 'Location' ? '_blank' : undefined}
+                    rel={contact.label === 'Location' ? 'noopener noreferrer' : undefined}
                     whileHover={{ x: 4 }}
                     className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border group hover:border-accent/50 transition-all duration-300"
                   >
@@ -224,8 +252,8 @@ export function Contact() {
                   <motion.a
                     key={social.name}
                     href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={social.name === 'Portfolio' ? undefined : '_blank'}
+                    rel={social.name === 'Portfolio' ? undefined : 'noopener noreferrer'}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     className="flex items-center justify-center gap-2 p-4 rounded-xl bg-card border border-border text-fg-secondary group hover:border-accent hover:text-accent transition-all duration-300"

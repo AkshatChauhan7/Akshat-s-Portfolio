@@ -190,7 +190,7 @@ export function Hero() {
                 className="relative w-full h-full rounded-2xl overflow-hidden bg-card border border-border"
               >
                 <Image
-                  src="/images/me.jpeg"
+                  src="/images/pfp.png"
                   alt="Akshat Chauhan"
                   fill
                   className="object-cover object-[50%_25%] group-hover:scale-105 transition-transform duration-1000 ease-out"

@@ -78,16 +78,14 @@ export function About() {
                   whileHover={{ y: -4 }}
                   className="card-editorial p-6 rounded-xl group"
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent/20 transition-colors duration-300">
+                  <div className="flex flex-col items-start">
+                    <div className="flex-shrink-0 w-12 h-12 mb-4 rounded-lg bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent/20 transition-colors duration-300">
                       <feature.icon className="w-6 h-6" aria-hidden="true" />
                     </div>
-                    <div>
-                      <h4 className="heading-4 text-fg-primary mb-2 group-hover:text-accent transition-colors duration-300">
-                        {feature.title}
-                      </h4>
-                      <p className="body-sm text-fg-muted leading-relaxed">{feature.description}</p>
-                    </div>
+                    <h4 className="heading-4 text-fg-primary mb-2 group-hover:text-accent transition-colors duration-300">
+                      {feature.title}
+                    </h4>
+                    <p className="body-sm text-fg-muted leading-relaxed">{feature.description}</p>
                   </div>
                 </motion.div>
               ))}

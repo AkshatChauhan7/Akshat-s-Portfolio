@@ -139,7 +139,27 @@ export const certificates: Certificate[] = [
     fullImageUrl: '/Certificates/Coursera DTI.pdf',
     category: 'Software Engineering',
     description: 'Certification in design thinking methodologies, innovation frameworks, and creative problem-solving.'
-  }
+  },
+  {
+    id: 'coursera-automata',
+    title: 'Automata Theory',
+    issuer: 'Coursera',
+    date: '2025',
+    thumbnailUrl: '/Certificates/Coursera Automata.pdf',
+    fullImageUrl: '/Certificates/Coursera Automata.pdf',
+    category: 'Programming',
+    description: 'Certification covering formal languages, finite automata, regular expressions, and computational models.'
+  },
+  {
+    id: 'coursera-ethics',
+    title: 'Professional Ethics',
+    issuer: 'Coursera',
+    date: '2025',
+    thumbnailUrl: '/Certificates/Coursera Ethics.pdf',
+    fullImageUrl: '/Certificates/Coursera Ethics.pdf',
+    category: 'Other',
+    description: 'Certification in professional ethics, responsible conduct, and ethical decision-making.'
+  },
 ];
 
 export const getCertificatesByCategory = (category: Certificate['category']): Certificate[] => {

@@ -17,6 +17,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://akshatchauhan.dev'),
   title: 'Akshat Chauhan | Portfolio',
   description: 'Computer Science student passionate about building efficient solutions, web development, competitive programming, and automation.',
   keywords: ['Software Developer', 'Computer Science', 'Full Stack', 'Competitive Programming', 'Automation', 'Portfolio'],
@@ -29,6 +30,13 @@ export const metadata: Metadata = {
     title: 'Akshat Chauhan | Portfolio',
     description: 'Computer Science student passionate about building efficient solutions and automating the world, one line of code at a time.',
     siteName: 'Akshat Chauhan Portfolio',
+    images: ['/images/pfp.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Akshat Chauhan | Portfolio',
+    description: 'Computer Science student passionate about building efficient solutions and automating the world, one line of code at a time.',
+    images: ['/images/pfp.png'],
   },
 }
 

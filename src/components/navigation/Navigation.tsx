@@ -100,14 +100,14 @@ export function Navigation() {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1 md:space-x-2 lg:space-x-4">
+          <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
             {navItems.map((item) => (
               <motion.button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 0 }}
-                className={`relative px-2 py-3 text-sm font-medium tracking-wide uppercase transition-all duration-300 ${
+                className={`relative whitespace-nowrap px-1 xl:px-2 py-3 text-xs xl:text-sm font-medium tracking-wide uppercase transition-all duration-300 ${
                   activeSection === item.href.substring(1)
                     ? 'text-accent'
                     : 'text-fg-secondary hover:text-fg-primary'
