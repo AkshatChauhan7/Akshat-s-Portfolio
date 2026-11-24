@@ -160,6 +160,46 @@ export const certificates: Certificate[] = [
     category: 'Other',
     description: 'Certification in professional ethics, responsible conduct, and ethical decision-making.'
   },
+  {
+    id: 'skillsbuild-llms',
+    title: 'Large Language Models',
+    issuer: 'IBM SkillsBuild',
+    date: '2026',
+    thumbnailUrl: '/Certificates/Completion Certificate _ SkillsBuild LLMs.pdf',
+    fullImageUrl: '/Certificates/Completion Certificate _ SkillsBuild LLMs.pdf',
+    category: 'AI/ML',
+    description: 'Completion certificate covering fundamentals and practical applications of large language models.'
+  },
+  {
+    id: 'skillsbuild-ai',
+    title: 'Artificial Intelligence',
+    issuer: 'IBM SkillsBuild',
+    date: '2026',
+    thumbnailUrl: '/Certificates/Completion Certificate _ SkillsBuild_AI.pdf',
+    fullImageUrl: '/Certificates/Completion Certificate _ SkillsBuild_AI.pdf',
+    category: 'AI/ML',
+    description: 'Completion certificate in core artificial intelligence concepts and real-world use cases.'
+  },
+  {
+    id: 'skillsbuild-ai-fundamentals',
+    title: 'Exploring AI Fundamentals',
+    issuer: 'IBM SkillsBuild',
+    date: '2026',
+    thumbnailUrl: '/Certificates/Completion Certificate _ SkillsBuild_Exploring AI fundamentals.pdf',
+    fullImageUrl: '/Certificates/Completion Certificate _ SkillsBuild_Exploring AI fundamentals.pdf',
+    category: 'AI/ML',
+    description: 'Certificate focused on foundational AI concepts, terminology, and introductory workflows.'
+  },
+  {
+    id: 'ibm-design-thinking',
+    title: 'Design Thinking',
+    issuer: 'IBM',
+    date: '2026',
+    thumbnailUrl: '/Certificates/IBMDesign20261124-20-xbn1wr.pdf',
+    fullImageUrl: '/Certificates/IBMDesign20261124-20-xbn1wr.pdf',
+    category: 'Software Engineering',
+    description: 'Certification in design thinking principles for user-centered problem solving and innovation.'
+  },
 ];
 
 export const getCertificatesByCategory = (category: Certificate['category']): Certificate[] => {
